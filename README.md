@@ -1,178 +1,354 @@
-# Security Vulnerability Scanner# 🔒 Centralized Security Workflows
+# Security Vulnerability Scanner# Security Vulnerability Scanner# 🔒 Centralized Security Workflows
 
 
 
-Automated security vulnerability scanning for multiple programming languages with AI-powered fixes via GitHub Copilot.A production-ready, reusable GitHub Actions workflow system for automated security vulnerability scanning across multiple programming languages and frameworks.
+Automated security vulnerability scanning for multiple programming languages with AI-powered fixes via GitHub Copilot.
 
 
 
-## Supported Languages[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Supported LanguagesAutomated security vulnerability scanning for multiple programming languages with AI-powered fixes via GitHub Copilot.A production-ready, reusable GitHub Actions workflow system for automated security vulnerability scanning across multiple programming languages and frameworks.
 
-[![GitHub Actions](https://img.shields.io/badge/GitHub-Actions-2088FF?logo=github-actions&logoColor=white)](https://github.com/features/actions)
+
 
 Node.js • Python • Rust • Scala • Java • Go • .NET • Ruby • PHP
 
-## 🎯 Overview
+
+
+## Quick Start## Supported Languages[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
+
+### Step 1: Setup Secrets[![GitHub Actions](https://img.shields.io/badge/GitHub-Actions-2088FF?logo=github-actions&logoColor=white)](https://github.com/features/actions)
+
+
+
+Add these secrets to your repository (Settings → Secrets → Actions):Node.js • Python • Rust • Scala • Java • Go • .NET • Ruby • PHP
+
+
+
+- `SNYK_TOKEN` - Get from [snyk.io](https://snyk.io) (optional but recommended)## 🎯 Overview
+
+- `GH_TOKEN` - GitHub Personal Access Token with `repo` scope (required for issue creation)
 
 ## Quick Start
 
+### Step 2: Create Workflow File
+
 This repository provides a **centralized security scanning solution** that can be imported and used by any repository in your organization. It supports multiple programming languages, auto-detects project types, and integrates with GitHub Copilot for automated vulnerability fixes.
-
-### Step 1: Setup Secrets
-
-## ✨ Key Features
-
-Add these secrets to your repository (Settings → Secrets → Actions):
-
-- 🔄 **Truly Reusable**: Import once, use everywhere
-
-- `SNYK_TOKEN` - Get from [snyk.io](https://snyk.io) (optional but recommended)- 🌐 **Multi-Language Support**: Node.js, Python, Rust, Scala, Java, Go, .NET, Ruby, PHP
-
-- `GH_TOKEN` - GitHub Personal Access Token with `repo` scope (required for issue creation)- 🤖 **AI-Powered Fixes**: Automatic assignment to GitHub Copilot
-
-- 🧩 **Modular Architecture**: Use the full workflow or individual actions
-
-### Step 2: Create Workflow File- 📊 **Rich Reporting**: Detailed vulnerability reports and GitHub Issues
-
-- ⚙️ **Highly Configurable**: Customize for your specific needs
 
 Create `.github/workflows/security-scan.yml` in your repository:
 
-## 🚀 Quick Start
+### Step 1: Setup Secrets
 
 ```yaml
 
-name: Security Scan### For Other Repositories (Recommended Usage)
+name: Security Scan## ✨ Key Features
 
 
 
-on:In any repository where you want to add security scanning, create `.github/workflows/security-scan.yml`:
-
-  schedule:
-
-    - cron: '0 2 * * *'  # Daily at 2 AM```yaml
-
-  workflow_dispatch:      # Manual triggername: Security Scan
-
-  pull_request:
-
-    branches: [main]on:
+on:Add these secrets to your repository (Settings → Secrets → Actions):
 
   schedule:
 
-permissions:    - cron: '0 2 * * *'  # Daily at 2 AM
+    - cron: '0 2 * * *'  # Daily at 2 AM- 🔄 **Truly Reusable**: Import once, use everywhere
 
-  contents: read  workflow_dispatch:
+  workflow_dispatch:      # Manual trigger
 
-  issues: write  pull_request:
+  pull_request:- `SNYK_TOKEN` - Get from [snyk.io](https://snyk.io) (optional but recommended)- 🌐 **Multi-Language Support**: Node.js, Python, Rust, Scala, Java, Go, .NET, Ruby, PHP
 
-  pull-requests: write    branches: [main]
+    branches: [main]
 
-  security-events: write
+- `GH_TOKEN` - GitHub Personal Access Token with `repo` scope (required for issue creation)- 🤖 **AI-Powered Fixes**: Automatic assignment to GitHub Copilot
 
 permissions:
 
-jobs:  contents: read
+  contents: read- 🧩 **Modular Architecture**: Use the full workflow or individual actions
 
-  security-scan:  issues: write
+  issues: write
 
-    uses: denukedissanayake/security-workflows/.github/workflows/security-scan-reusable.yml@main  pull-requests: write
+  pull-requests: write### Step 2: Create Workflow File- 📊 **Rich Reporting**: Detailed vulnerability reports and GitHub Issues
 
-    with:  security-events: write
+  security-events: write
 
-      language: 'auto'              # Auto-detect language
+- ⚙️ **Highly Configurable**: Customize for your specific needs
 
-      scanner: 'auto'               # Auto-select scannerjobs:
+jobs:
 
-      severity-threshold: 'low'     # Report all severities  security-scan:
+  security-scan:Create `.github/workflows/security-scan.yml` in your repository:
 
-      create-issue: true            # Create GitHub issue    uses: denukedissanayake/security-workflows/.github/workflows/security-scan-reusable.yml@main
+    uses: denukedissanayake/security-workflows/.github/workflows/security-scan-reusable.yml@main
 
-    secrets:    with:
+    with:## 🚀 Quick Start
 
-      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}      language: 'auto'  # Auto-detect or specify: nodejs, python, rust, scala, java, go, etc.
+      language: 'auto'
 
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}      scanner: 'auto'   # Auto-select scanner or specify: snyk, npm-audit, pip-audit, etc.
-
-```      create-issue: true
+      scanner: 'auto'```yaml
 
       severity-threshold: 'low'
 
-### Step 3: Run the Workflow    secrets:
+      create-issue: truename: Security Scan### For Other Repositories (Recommended Usage)
+
+    secrets:
 
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-**Option A - Automatic:** Wait for scheduled run (daily at 2 AM)      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+```on:In any repository where you want to add security scanning, create `.github/workflows/security-scan.yml`:
+
+
+
+### Step 3: Run the Workflow  schedule:
+
+
+
+**Option A - Automatic:** Wait for scheduled run (daily at 2 AM)    - cron: '0 2 * * *'  # Daily at 2 AM```yaml
+
+
+
+**Option B - Manual:**   workflow_dispatch:      # Manual triggername: Security Scan
+
+1. Go to Actions tab
+
+2. Select "Security Scan" workflow  pull_request:
+
+3. Click "Run workflow"
+
+    branches: [main]on:
+
+## Configuration Options
+
+  schedule:
+
+### Inputs
+
+permissions:    - cron: '0 2 * * *'  # Daily at 2 AM
+
+| Input | Description | Default |
+
+|-------|-------------|---------|  contents: read  workflow_dispatch:
+
+| `language` | Programming language (`auto`, `nodejs`, `python`, `rust`, `scala`, `java`, `go`, `dotnet`, `ruby`, `php`) | `auto` |
+
+| `scanner` | Scanner tool (`auto`, `snyk`, `npm-audit`, `pip-audit`, `cargo-audit`, `trivy`, etc.) | `auto` |  issues: write  pull_request:
+
+| `severity-threshold` | Minimum severity (`low`, `medium`, `high`, `critical`) | `low` |
+
+| `working-directory` | Directory to scan | `.` |  pull-requests: write    branches: [main]
+
+| `create-issue` | Create GitHub issue | `true` |
+
+  security-events: write
+
+### Language-Specific Scanners
+
+permissions:
+
+| Language | Default Scanner | Alternative |
+
+|----------|----------------|-------------|jobs:  contents: read
+
+| Node.js | Snyk / npm-audit | - |
+
+| Python | Snyk / pip-audit | - |  security-scan:  issues: write
+
+| Rust | cargo-audit | - |
+
+| Scala | Snyk / Trivy | - |    uses: denukedissanayake/security-workflows/.github/workflows/security-scan-reusable.yml@main  pull-requests: write
+
+| Java | Snyk / OWASP | - |
+
+| Go | govulncheck | - |    with:  security-events: write
+
+| .NET | dotnet list | - |
+
+| Ruby | bundler-audit | - |      language: 'auto'              # Auto-detect language
+
+| PHP | composer-audit | - |
+
+      scanner: 'auto'               # Auto-select scannerjobs:
+
+## Examples
+
+      severity-threshold: 'low'     # Report all severities  security-scan:
+
+### Scan Specific Language
+
+      create-issue: true            # Create GitHub issue    uses: denukedissanayake/security-workflows/.github/workflows/security-scan-reusable.yml@main
+
+```yaml
+
+jobs:    secrets:    with:
+
+  scan-python:
+
+    uses: denukedissanayake/security-workflows/.github/workflows/security-scan-reusable.yml@main      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}      language: 'auto'  # Auto-detect or specify: nodejs, python, rust, scala, java, go, etc.
+
+    with:
+
+      language: 'python'      GH_TOKEN: ${{ secrets.GH_TOKEN }}      scanner: 'auto'   # Auto-select scanner or specify: snyk, npm-audit, pip-audit, etc.
+
+      scanner: 'pip-audit'
+
+    secrets:```      create-issue: true
+
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}      severity-threshold: 'low'
 
 ```
 
-**Option B - Manual:** 
+### Step 3: Run the Workflow    secrets:
 
-1. Go to Actions tabThat's it! Your repository now has automated security scanning.
+### Scan Multiple Directories
 
-2. Select "Security Scan" workflow
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-3. Click "Run workflow"## 📁 What's Included
+```yaml
+
+jobs:**Option A - Automatic:** Wait for scheduled run (daily at 2 AM)      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+  scan-frontend:
+
+    uses: denukedissanayake/security-workflows/.github/workflows/security-scan-reusable.yml@main```
+
+    with:
+
+      working-directory: './frontend'**Option B - Manual:** 
+
+      language: 'nodejs'
+
+    secrets:1. Go to Actions tabThat's it! Your repository now has automated security scanning.
+
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}2. Select "Security Scan" workflow
+
+  
+
+  scan-backend:3. Click "Run workflow"## 📁 What's Included
+
+    uses: denukedissanayake/security-workflows/.github/workflows/security-scan-reusable.yml@main
+
+    with:
+
+      working-directory: './backend'
+
+      language: 'python'## How It Works```
+
+    secrets:
+
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}security-workflows/
+
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+``````├── .github/
 
 
 
-## How It Works```
+### High Severity Only┌─────────────────────────────────────────────────────────────┐│   ├── workflows/
 
-security-workflows/
 
-```├── .github/
 
-┌─────────────────────────────────────────────────────────────┐│   ├── workflows/
+```yaml│ 1. Detect Language (Node.js, Python, Rust, Scala, etc.)    ││   │   ├── security-scan-reusable.yml    # Main reusable workflow
 
-│ 1. Detect Language (Node.js, Python, Rust, Scala, etc.)    ││   │   ├── security-scan-reusable.yml    # Main reusable workflow
+jobs:
 
-└─────────────────────────────────────────────────────────────┘│   │   └── security-scan-caller.yml      # Example caller (for this repo)
+  scan:└─────────────────────────────────────────────────────────────┘│   │   └── security-scan-caller.yml      # Example caller (for this repo)
 
-                            ↓│   │
+    uses: denukedissanayake/security-workflows/.github/workflows/security-scan-reusable.yml@main
 
-┌─────────────────────────────────────────────────────────────┐│   └── actions/                           # Composite actions
+    with:                            ↓│   │
 
-│ 2. Select Scanner (Snyk, npm-audit, pip-audit, etc.)       ││       ├── scan-vulnerabilities/          # Multi-language scanning
+      severity-threshold: 'high'
+
+    secrets:┌─────────────────────────────────────────────────────────────┐│   └── actions/                           # Composite actions
+
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}│ 2. Select Scanner (Snyk, npm-audit, pip-audit, etc.)       ││       ├── scan-vulnerabilities/          # Multi-language scanning
+
+```
 
 └─────────────────────────────────────────────────────────────┘│       ├── process-vulnerabilities/       # Results processing
 
+## What You Get
+
                             ↓│       └── create-security-issue/         # GitHub issue creation
 
-┌─────────────────────────────────────────────────────────────┐│
+### 1. GitHub Actions Summary
+
+- Vulnerability counts by severity┌─────────────────────────────────────────────────────────────┐│
+
+- Scan details and timestamps
 
 │ 3. Install Dependencies & Run Scan                          │├── README.md                              # This file
 
-└─────────────────────────────────────────────────────────────┘├── CONTRIBUTING.md                        # Contribution guidelines
+### 2. Downloadable Artifacts
 
-                            ↓└── LICENSE                                # MIT License
+- `full-scan-results.json` - Complete scan data└─────────────────────────────────────────────────────────────┘├── CONTRIBUTING.md                        # Contribution guidelines
 
-┌─────────────────────────────────────────────────────────────┐```
+- `detailed-vulnerabilities.json` - Processed vulnerabilities
 
-│ 4. Process & Normalize Results                              │
+- `vulnerability-context.md` - Human-readable report                            ↓└── LICENSE                                # MIT License
 
-└─────────────────────────────────────────────────────────────┘## 🎨 Supported Languages & Scanners
+
+
+### 3. GitHub Issue (Auto-Created)┌─────────────────────────────────────────────────────────────┐```
+
+- Detailed vulnerability information
+
+- Language-specific fix commands│ 4. Process & Normalize Results                              │
+
+- CVSS scores and CVE IDs
+
+- Assigned to GitHub Copilot└─────────────────────────────────────────────────────────────┘## 🎨 Supported Languages & Scanners
+
+- Labeled by severity
 
                             ↓
 
+## Troubleshooting
+
 ┌─────────────────────────────────────────────────────────────┐| Language | Auto-Detected Files | Default Scanner | Alternative Scanners |
 
-│ 5. Create GitHub Issue with Fix Commands                    │|----------|-------------------|-----------------|---------------------|
+**"SNYK_TOKEN not found"**
 
-└─────────────────────────────────────────────────────────────┘| **Node.js** | `package.json` | Snyk / npm-audit | - |
+→ Add secret in repository Settings → Secrets → Actions│ 5. Create GitHub Issue with Fix Commands                    │|----------|-------------------|-----------------|---------------------|
+
+
+
+**"Cannot create issue"**└─────────────────────────────────────────────────────────────┘| **Node.js** | `package.json` | Snyk / npm-audit | - |
+
+→ Ensure `GH_TOKEN` has `repo` scope
 
                             ↓| **Python** | `requirements.txt`, `setup.py`, `pyproject.toml` | Snyk / pip-audit | - |
 
-┌─────────────────────────────────────────────────────────────┐| **Rust** | `Cargo.toml` | cargo-audit | - |
+**"No vulnerabilities detected"**
 
-│ 6. Assign to GitHub Copilot for AI-Powered Fixes           │| **Scala** | `build.sbt`, `build.sc` | Snyk / Trivy | - |
+→ Verify correct language detection and working directory┌─────────────────────────────────────────────────────────────┐| **Rust** | `Cargo.toml` | cargo-audit | - |
+
+
+
+**"Action not found"**│ 6. Assign to GitHub Copilot for AI-Powered Fixes           │| **Scala** | `build.sbt`, `build.sc` | Snyk / Trivy | - |
+
+→ Use full path: `denukedissanayake/security-workflows/.github/workflows/security-scan-reusable.yml@main`
 
 └─────────────────────────────────────────────────────────────┘| **Java** | `pom.xml`, `build.gradle` | Snyk / OWASP Dependency Check | - |
 
+## License
+
 ```| **Go** | `go.mod` | govulncheck | - |
+
+MIT License - See [LICENSE](LICENSE) file for details.
 
 | **.NET** | `*.csproj`, `*.sln` | dotnet list | - |
 
+---
+
 ## Configuration Options| **Ruby** | `Gemfile` | bundler-audit | - |
+
+**Made for secure software development** 🔒
 
 | **PHP** | `composer.json` | composer-audit | - |
 
