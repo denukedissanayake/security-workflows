@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   security-scan:
-    uses: ./.github/workflows/security-scan-reusable.yml
+    uses: <YOUR-GITHUB-USERNAME>/security-workflows/.github/workflows/security-scan-reusable.yml
     with:
       language: 'auto'
       scanner: 'auto'
