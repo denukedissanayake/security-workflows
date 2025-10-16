@@ -333,7 +333,6 @@ runs:
                 echo '{"vulnerabilities": []}' > dependency-scan-results.json
               fi
               
-              # Save raw Snyk results for debugging
               cp dependency-scan-results.json snyk-results.json || true
               
               echo "INFO: Running Snyk code analysis"

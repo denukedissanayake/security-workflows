@@ -1,8 +1,4 @@
-name: Security Scan Caller (Example for This Repository)
-
-# This workflow demonstrates how to use the reusable workflow within this repository.
-# For external repositories, see examples/ directory or use:
-# uses: denukedissanayake/security-workflows/.github/workflows/security-scan-reusable.yml@main
+name: Security Scan
 
 on:
   schedule:
@@ -23,13 +19,12 @@ permissions:
   security-events: write
 
 jobs:
-  call-security-scan:
-    # Internal usage (for this repository only)
+  security-scan:
     uses: ./.github/workflows/security-scan-reusable.yml
     with:
-      language: 'auto'  # Auto-detect project language (nodejs, python, rust, scala, java, go, etc.)
-      scanner: 'auto'   # Auto-select best scanner for detected language
-      severity-threshold: 'low'  # Report all severities
+      language: 'auto'
+      scanner: 'auto'
+      severity-threshold: 'low'
       working-directory: '.'
       create-issue: true
     secrets:
