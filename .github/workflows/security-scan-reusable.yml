@@ -70,7 +70,7 @@ jobs:
 
       - name: Run vulnerability scan
         id: scan
-        uses: ./.github/actions/scan-vulnerabilities
+        uses: denukedissanayake/security-workflows/.github/actions/scan-vulnerabilities@main
         with:
           snyk-token: ${{ secrets.SNYK_TOKEN }}
           working-directory: ${{ inputs.working-directory }}
@@ -80,7 +80,7 @@ jobs:
 
       - name: Process vulnerabilities
         id: process
-        uses: ./.github/actions/process-vulnerabilities
+        uses: denukedissanayake/security-workflows/.github/actions/process-vulnerabilities@main
         with:
           scan-results-path: ${{ steps.scan.outputs.scan-results-path }}
           repository: ${{ github.repository }}
@@ -119,7 +119,7 @@ jobs:
           path: vulnerability-data/
 
       - name: Create security issue with Copilot assignment
-        uses: ./.github/actions/create-security-issue
+        uses: denukedissanayake/security-workflows/.github/actions/create-security-issue@main
         with:
           github-token: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
           vulnerability-data-path: 'vulnerability-data/detailed-vulnerabilities.json'
